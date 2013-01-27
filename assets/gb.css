@@ -1,0 +1,42 @@
+@import url(/bags/common/tiddlers/normalize.css);
+
+body {
+    padding: 2em 4em 2em 4em;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    border: thin solid lightgrey;
+    padding: 1em;
+}
+
+.container {
+  -moz-column-count:3; /* Firefox */
+  -webkit-column-count:3; /* Safari and Chrome */
+  column-count:3;
+}
+
+.container p {
+    -moz-column-span: all;
+    -webkit-column-span: all;
+    column-span: all;
+    text-align: center;
+}
+
+.container ul {
+    padding: 1em;
+    -webkit-column-break-after: always;
+}
+
+#elders {
+    background-color: #dddddd;
+}
+
+#orphans {
+    background-color: #bbbbbb;
+}
+
+#missing {
+    background-color: #999999;
+}
