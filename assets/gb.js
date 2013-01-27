@@ -32,7 +32,9 @@ $(function() {
 		});
 		$('#missing').empty();
 		$.each(missings, function(index, title) {
-			var link = $('<a>').attr('href', '/' + encodeURIComponent(title))
+			var link = $('<a>').attr({
+				'href': '/' + encodeURIComponent(title),
+				'title': fronts[title].join(', ')})
 				.text(title);
 			var list = $('<li>').append(link);
 			$('#missing').append(list);
@@ -43,10 +45,14 @@ $(function() {
 		links(tiddler, 'frontlinks', addFront);
 	}
 
-	function addFront(tiddlers) {
+	function addFront(tiddlers, source_tiddler) {
 		$.each(tiddlers, function(index, tiddler) {
 			if (tiddler.bag === localBag) {
-				fronts[tiddler.title] = 1;
+				if (fronts[tiddler.title]) {
+					fronts[tiddler.title].push(source_tiddler.title);
+				} else {
+					fronts[tiddler.title] = [source_tiddler.title];
+				}
 			}
 		});
 		$(document).trigger('frontsup');
@@ -56,7 +62,9 @@ $(function() {
 		$.ajax({
 			dataType: 'json',
 			url: tiddler.uri + '/' + path,
-			success: updater
+			success: function(tiddlers) {
+				updater(tiddlers, tiddler);
+			}
 		});
 	}
 
