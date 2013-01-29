@@ -47,7 +47,8 @@ $(function() {
 
 	function addFront(tiddlers, source_tiddler) {
 		$.each(tiddlers, function(index, tiddler) {
-			if (tiddler.bag === localBag) {
+			if (tiddler.bag === localBag &&
+				tiddler.tags.indexOf('excludeLists') == -1) {
 				if (fronts[tiddler.title]) {
 					fronts[tiddler.title].push(source_tiddler.title);
 				} else {
